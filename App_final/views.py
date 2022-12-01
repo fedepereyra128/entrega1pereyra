@@ -28,8 +28,24 @@ def inicio(request):
     return render(request ,"App_final/inicio.html")
 
 def auto(request):
+    if request.method=="POST":
+        form=autoForm(request.POST)
+
+        if form.is_valid():
+            informacion=form.cleaned_data
+
+            marca1=informacion["marca"]
+            modelo1=informacion["modelo"]
+            patente1=informacion["patente"]
+            auto_nuevo=Auto(marca=marca1 ,modelo=modelo1 , patente=str(patente1))
+            auto_nuevo.save()
+            return render(request ,"App_final/inicio.html")
+    else:
+        formulario=autoForm()
+
+    return render(request ,"App_final/auto.html", {"form":formulario})
   
-    return render (request, "App_final/auto.html")
+    
 
 
 

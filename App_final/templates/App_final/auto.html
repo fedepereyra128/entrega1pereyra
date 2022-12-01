@@ -8,5 +8,18 @@
 
 
 {% block contenido_cambia %}  
-<h1> Gracias por su visita</h1>
+<form action="{% url "autoFormulario" %}" method="POST"> {% csrf_token %}
+
+    {{ form.as_table }}
+    
+    <input type="submit" value="enviar auto">
+    
+    
+    
+    
+    
+    
+    
+    
+</form>
 {% endblock %}
