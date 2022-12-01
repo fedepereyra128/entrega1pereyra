@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from App_final.forms import autoForm
 
 from .models import Auto, Motos, Pickup_suv
 
@@ -35,3 +36,24 @@ def moto(request):
 
 def pickup_suv(request):
     return render(request,"App_final/pickup_suv.html")
+
+
+
+def autoFormulario(request):
+    if request.method=="POST":
+        form=autoForm(request.POST)
+
+        if form.is_valid():
+            informacion=form.cleaned_data
+
+            marca1=informacion["marca"]
+            modelo1=informacion["modelo"]
+            patente1=informacion["patente"]
+            auto_nuevo=Auto(marca=marca1 ,modelo=modelo1 , patente=str(patente1))
+            auto_nuevo.save()
+            return render(request ,"App_final/inicio.html")
+    else:
+        formulario=autoForm()
+
+    return render(request ,"App_final/autoFormulario.html", {"form":formulario})
+

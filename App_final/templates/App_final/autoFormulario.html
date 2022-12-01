@@ -1,0 +1,35 @@
+{% extends "App_final/padre.html" %}
+
+{% load static %}
+
+{% block titulo %}    
+<h1 class="mb-5"> Formulario de Autos </h1>
+{% endblock %}  
+
+
+
+{% block contenido_cambia %}  
+<h1>Formulario</h1>
+
+<form action="{% url "autoFormulario" %}" method="POST"> {% csrf_token %}
+
+{{ form.as_table }}
+
+<input type="submit" value="enviar auto">
+
+
+
+
+
+
+
+
+</form>
+
+
+
+
+
+
+
+{% endblock %}
