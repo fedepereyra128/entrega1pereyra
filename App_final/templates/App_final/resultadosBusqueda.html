@@ -9,9 +9,15 @@
 
 {% block contenido_cambia %}  
 
+<ul>
 {% for auto in auto %} 
+    <li>{{auto.marca}}</li>
+    <li>{{auto.patente}}</li>
+    <li>{{auto.modelo}}</li>
+    <br>
 
-    <p> {{ auto }}</p>
+
 
 {% endfor %}
+</ul>
 {% endblock %}
