@@ -7,6 +7,8 @@ urlpatterns =[
     path("pickup_suv/", pickup_suv, name="pickup_suv"),
     path("", inicio, name="inicio"),
     path("autoFormulario/", autoFormulario , name="autoFormulario"),
+    path("busquedaAuto/", busquedaAuto ,name="busquedaAuto"),
+    path("buscar/", buscar ,name="buscar"),
 
 
 

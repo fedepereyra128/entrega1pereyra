@@ -8,5 +8,19 @@
 
 
 {% block contenido_cambia %}  
-<h1> Ultimos modelos </h1>
+<form action="{% url "pickup_suv" %}" method="POST"> {% csrf_token %}
+
+    {{ form.as_table }}
+    
+    <input type="submit" value="enviar pickup_suv">
+    
+    
+    
+    
+    
+    
+    
+    
+    </form>
+    
 {% endblock %}

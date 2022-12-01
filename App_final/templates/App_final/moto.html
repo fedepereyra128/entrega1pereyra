@@ -8,5 +8,12 @@
 
 
 {% block contenido_cambia %}  
-<h1> Nuevos modelos proximamente</h1>
+<form action="{% url "moto" %}" method="POST"> {% csrf_token %}
+
+    {{ form.as_table }}
+    
+    <input type="submit" value="enviar moto">
+    
+    </form>
+    
 {% endblock %}

@@ -1,0 +1,17 @@
+{% extends "App_final/padre.html" %}
+
+{% load static %}
+
+{% block titulo %}    
+<h1 class="mb-5">Pagina de Busqueda</h1>
+{% endblock %}  
+
+
+{% block contenido_cambia %}  
+
+{% for auto in auto %} 
+
+    <p> {{ auto }}</p>
+
+{% endfor %}
+{% endblock %}

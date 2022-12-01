@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from App_final.forms import autoForm
+from App_final.forms import autoForm, MotosForm, Pickup_suv_Form
 
 from .models import Auto, Motos, Pickup_suv
 
@@ -31,11 +31,44 @@ def auto(request):
   
     return render (request, "App_final/auto.html")
 
+
+
+
 def moto(request):
-    return render(request ,"App_final/moto.html")
+
+    if request.method=="POST":
+        form=MotosForm(request.POST)
+        if form.is_valid():
+            informacion=form.cleaned_data
+            marca=informacion["marca"]
+            tipo=informacion["tipo"]
+            cilindrada=informacion["cilindrada"]
+            moto_nueva=Motos(marca=marca , tipo=tipo , cilindrada=cilindrada)
+            moto_nueva.save()
+            return render(request ,"App_final/inicio.html")
+    else:
+        formulario=MotosForm()
+
+    return render(request ,"App_final/moto.html" , {"form":formulario})
+
+
+
 
 def pickup_suv(request):
-    return render(request,"App_final/pickup_suv.html")
+    if request.method=="POST":
+        form=Pickup_suv_Form(request.POST)
+        if form.is_valid():
+            informacion=form.cleaned_data
+            marca=informacion["marca"]
+            tipo_motor=informacion["tipo_motor"]
+            rodado=informacion["rodado"]
+            pickup_suv_nueva=Pickup_suv(marca=marca, tipo_motor=tipo_motor, rodado=rodado)
+            pickup_suv_nueva.save()
+            return render(request,"App_final/inicio.html")
+    else:
+        formulario=Pickup_suv_Form()
+
+    return render(request,"App_final/pickup_suv.html" , {"form":formulario})
 
 
 
@@ -57,3 +90,16 @@ def autoFormulario(request):
 
     return render(request ,"App_final/autoFormulario.html", {"form":formulario})
 
+
+def busquedaAuto(request):
+    return render(request, "App_final/busquedaAuto.html")
+
+def buscar(request):
+    if request.GET["marca"]:
+        marca=request.GET["marca"]
+        auto=Auto.objects.filter(marca=marca)
+
+        return render(request,"App_final/resultadosBusqueda.html", {"auto":auto})
+
+    else:
+        return render(request, "App_final/busquedaAuto.html", {"mensaje":"Auto no encontrado"})
